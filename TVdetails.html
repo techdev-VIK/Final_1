@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>TV Details</title>
+</head>
+
+<body>
+  <header>
+    <h1><a href="index.html">TV Zone</a></h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="TV.html">TVs</a></li>
+        <li><a href="tvBrands.html">TV Brands</a></li>
+        <li><a href="report.html">Report</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h2>TV Details</h2>
+    <section id="tvDetails">
+
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 TVZone. All rights reserved.</p>
+  </footer>
+
+  <script>
+
+    //database
+    let televisions = [
+      {
+        id: "1",
+        name: "Smart LED TV",
+        model: "LED123",
+        detail: "A feature-rich Smart LED TV with high-definition display.",
+        manufacturer: "TechVision",
+        year: 2022,
+        screenType: "LED",
+        size: 55,
+        resolution: "4K",
+        price: 80000,
+      },
+      {
+        id: "2",
+        name: "Curved OLED TV",
+        model: "OLED456",
+        detail: "Immersive entertainment with a curved OLED display.",
+        manufacturer: "VisionX",
+        year: 2023,
+        screenType: "OLED",
+        size: 65,
+        resolution: "8K",
+        price: 120000,
+      },
+      {
+        id: "3",
+        name: "Ultra HD QLED TV",
+        model: "QLED789",
+        detail: "QLED technology for vibrant colors and superior clarity.",
+        manufacturer: "ColorTech",
+        year: 2021,
+        screenType: "QLED",
+        size: 75,
+        resolution: "4K",
+        price: 150000,
+      },
+    ];
+
+
+    //find the id in DB
+
+    function getparameters(id) {
+      let url = new URL(window.location.href);
+
+      return url.searchParams.get(id);
+    }
+
+    let tvID = getparameters('id');
+
+    let television;
+    for (let i = 0; i < televisions.length; i++) {
+      if (televisions[i].id === tvID) {
+        television = televisions[i];
+      }
+    }
+
+    //display the result
+
+    let tvElement = document.querySelector("#tvDetails");
+
+    if (television) {
+      tvElement.innerHTML = `
+        <h3>${television.name}</h3>
+
+        <ul>
+          <li>Model: ${television.model}</li>
+          <li>Detail: ${television.detail}</li>
+          <li>Manufacturer: ${television.manufacturer}</li>
+          <li>Screen Type: ${television.screenType}</li>
+          <li>Resolution: ${television.resolution}</li>
+          <li>Year: ${television.year}</li>
+          <li>Price: Rs. ${television.price}</li>
+
+        </ul>
+      `
+    } else {
+      tvElement.innerHTML = `
+      TV Details not found.
+      `
+    }
+
+  </script>
+</body>
+
+</html>
